@@ -1,0 +1,176 @@
+* {
+  font-family: "Averta Demo PE";
+}
+
+body {
+  background-color: #021324;
+  color: #D3DAE4;
+}
+
+#articles{
+  color: #021324;
+}
+
+.search-box {
+  width: 420px;
+  background-color: #fff;
+  margin: 20px auto 0;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+input {
+  flex: 1;
+  height: 35px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+button .fa-solid {
+  width: 25px;
+  color: #021324;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: #021324;
+}
+
+.result-box {
+  position: absolute;
+  max-height: 230px;
+  overflow-y: scroll;
+  background-color: #fff;
+  width: 420px;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.result-box ul {
+  border-top: 1px solid #021324;
+  padding: 15px 10px;
+}
+
+.result-box ul li {
+  list-style: none;
+  border-radius: 3px;
+  padding: 15px 10px;
+  cursor: pointer;
+  color: #021324;
+  text-align: left;
+}
+
+.result-box ul li:hover {
+  background-color: #e9f3ff;
+}
+
+#container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+#suggestions {
+  border-radius: 10px;
+  background-color: aliceblue;
+  margin: 1rem;
+}
+
+#suggestion-box {
+  padding: 5%;
+}
+
+.btn-box {
+  width: 2%;
+  height: fit-content;
+  margin: 10px 0px;
+  position: relative;
+  border-radius: 30px;
+  background: #D3DAE4;
+}
+
+#interval-select {
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+#interval-select:focus {
+  outline: none;
+  border-color: #021324;
+}
+
+#interval-select option {
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  overflow: visible;
+}
+
+#interval-select option:hover {
+  background-color: #ccc;
+}
+
+#interval-select option:active {
+  background-color: #10b02b;
+}
+
+button {
+  font-weight: bold;
+  font-size: large;
+}
+
+footer {
+  background-color: #021324;
+  color: #D3DAE4;
+  text-align: center;
+}
+
+.copyright-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  background-color: inherit;
+  padding-top: 25px;
+}
+
+.copyright {
+  background-color: inherit;
+  font-size: large;
+  font-weight: bold;
+  padding-right: 40px;
+  padding-bottom: 60px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2.3fr 1fr;
+  grid-gap: 10px;
+}
+
+.grid-child {
+  margin: 0.4rem 1.5rem;
+}
+
+#stock-name {
+  font-weight: bolder;
+}

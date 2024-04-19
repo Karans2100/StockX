@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{companyName}}</title>
+    <link rel="icon" href="/static/assets/X.png" type="image/jpg">
+    <link rel="stylesheet" href="../static/stock.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-child">
+        <h1 id="stock-name">{{companyName}}</h1>
+        <h2 id="stock-price">Current Price: {{price}}</h2>
+
+        <div class="btn-box">
+          <select id="interval-select">
+            <option value="1d">1 Day</option>
+            <option value="1w">1 Week</option>
+            <option value="1m">1 Month</option>
+            <option value="1y">1 Year</option>
+            <option value="max">Max</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-child">
+        <div class="search-box">
+          <div class="row">
+            <input
+              type="text"
+              class="input-box"
+              placeholder="Search Stocks"
+              autocomplete="off"
+            />
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+          <div class="result-box"></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="grid-child">
+        <div id="stockChart" style="height: 430px; border-radius: 10px"></div>
+      </div>
+
+      <div id="grid-child">
+        <div id="suggestions">
+          <div id="suggestion-box">
+            <h2 style="color: #021324">StockX Suggests...</h2>
+            <h2 style="color: {{font_color}};">{{decision}} the stocks with {{sentiment}} sentiment</h2>
+            <h3 style="color: #021324">Source Articles 👇</h3>
+            <p style="color: #021324">
+              <a
+                id="articles"
+                href="https://www.livemint.com/market/stock-market-news/5-things-that-changed-for-the-stock-market-overnight-gift-nifty-to-us-fed-meet-11698804857082.html"
+                target="_blank"
+                >6 things that changed for the stock market overnight - Gift
+                Nifty to US Fed meet</a
+              >
+            </p>
+            <p>
+              <a
+                id="articles"
+                href="https://www.livemint.com/market/stock-market-news/internet-stocks-including-zomato-policybazaar-rategain-recover-in-2023-should-you-buy-them-for-long-term-11698745084469.html"
+                target="_blank"
+                >Internet stocks including Zomato, PolicyBazaar, RateGain
+                recover in 2023; should you buy them for long term?</a
+              >
+            </p>
+            <p>
+              <a
+                id="articles"
+                href="https://www.livemint.com/market/stock-market-news/cautious-of-headwinds-to-domestic-demand-inflation-to-average-5-7-in-2023-says-aurodeep-nandi-of-nomura-11698743251902.html"
+                target="_blank"
+                >Cautious of headwinds to domestic demand; inflation to average
+                5.7% in 2023, says Aurodeep Nandi of Nomura</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <p>Developed by Team StockX</p>
+      </div>
+    </footer>
+
+    <script>
+      var chart;
+      var intervalSelect = $("#interval-select");
+
+      function fetchStockData(interval) {
+        $.ajax({
+          url: "/get_chart_data/{{stockName}}",
+          method: "POST",
+          data: { interval: interval },
+          success: function (data) {
+            var options = {
+              chart: {
+                type: "line",
+              },
+              title: {
+                text: "Chart",
+              },
+              xAxis: {
+                type: "datetime",
+                title: {
+                  text: "Time",
+                },
+              },
+              yAxis: {
+                title: {
+                  text: "Price",
+                },
+              },
+              series: [
+                {
+                  name: "Price",
+                  data: data,
+                },
+              ],
+            };
+            chart = Highcharts.chart("stockChart", options);
+            chart.update({
+              chart: {
+                backgroundColor: "white",
+              },
+            });
+          },
+        });
+      }
+
+      intervalSelect.on("change", function () {
+        var selectedInterval = $(this).val();
+        fetchStockData(selectedInterval);
+      });
+
+      // Initial load
+      fetchStockData(intervalSelect.val());
+    </script>
+
+    <script src="../static/stock.js"></script>
+  </body>
+</html>
